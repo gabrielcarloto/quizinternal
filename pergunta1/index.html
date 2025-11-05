@@ -13,6 +13,7 @@
 
 		<link rel="stylesheet" href="../global.css">
 		<link rel="stylesheet" href="question.css">
+		<link rel="stylesheet" href="notifications.css">
 	</head>
 	<body>
 		<header class="header">
@@ -161,7 +162,53 @@
 			</div>
 		</footer>
 
+		<ul class="notifications">
+		</ul>
+
+
 		<script src="script.js"></script>
+		
+		<script type="module">
+			const { fakerPT_BR: faker } = await import('https://esm.sh/@faker-js/faker');
+
+
+
+
+function createNotification() {
+	const randomAvatar = faker.image.avatar()
+	const randomName = faker.person.firstName();
+
+	const notification = document.createElement('article')
+	notification.classList.add('notification')
+
+	const notificationsContainer = document.querySelector('ul.notifications')
+	const listItem = document.createElement('li')
+	listItem.append(notification)
+	notificationsContainer.append(listItem)
+
+	const imageContainer = document.createElement('div')
+	notification.append(imageContainer)
+
+	const image = document.createElement('img')
+	imageContainer.append(image)
+	image.src = randomAvatar
+
+	const textContainer = document.createElement('div')
+	notification.append(textContainer)
+
+	const nameSpan = document.createElement('span')
+	nameSpan.classList.add('name')
+	textContainer.append(nameSpan)
+	nameSpan.textContent = randomName
+
+	const contentSpan = document.createElement('span')
+	textContainer.append(contentSpan)
+	contentSpan.textContent = " completou o quiz e descobriu que é uma coxinha!"
+
+	setTimeout(() => listItem.remove(), 5 * 1000)
+}
+
+		</script>
 
 		<!-- SVGs -->
 		<svg style="display: none;">
