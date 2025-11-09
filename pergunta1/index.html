@@ -221,6 +221,7 @@
 				
 				setTimeout(() => {
 					notification.classList.add('slide-out');
+					notification.classList.add('exiting');
 					
 					notification.addEventListener('animationend', () => {
 						listItem.remove();

@@ -6,6 +6,7 @@ const feedbackPopup = document.querySelector('#feedback-popup');
 
 setupAnswerListeners();
 setupAnnoyingPopup();
+setupValidation();
 
 function setupAnswerListeners() {
   options.forEach((option) =>
@@ -79,5 +80,17 @@ function setupAnnoyingPopup() {
       headingText.style.fontSize = Math.min(fontSize * 1.25, 78) + 'px';
       state.wrongStarsClicked++;
     });
+  });
+}
+
+function setupValidation() {
+  const nextQuestionAnchor = document.querySelector('.next-question-link');
+  const options = Array.from(inputs);
+
+  nextQuestionAnchor.addEventListener('click', (e) => {
+    if (!options.some((option) => option.checked)) {
+      e.preventDefault();
+      window.alert('Selecione uma opção!!');
+    }
   });
 }
