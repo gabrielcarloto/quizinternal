@@ -12,7 +12,6 @@ function setupAnswerListeners() {
   options.forEach((option) =>
     option.addEventListener('click', () => {
       const input = option.querySelector('input[type="radio"]');
-      if (!input) return console.warn('Cade o input?????');
       input.click();
     }),
   );
@@ -35,7 +34,7 @@ function setupAnnoyingPopup() {
     state.mouseMoved = true;
   });
 
-  optionsWrapper.addEventListener('mouseover', () => {
+  function showPopup() {
     if (!state.mouseMoved || state.ratingPopupShown) return;
     state.ratingPopupShown = true;
 
@@ -48,7 +47,10 @@ function setupAnnoyingPopup() {
         ratingPopup.setAttribute('open', '');
       }),
     );
-  });
+  }
+
+  optionsWrapper.addEventListener('mouseover', showPopup);
+  optionsWrapper.addEventListener('touchend', showPopup);
 
   const ratingStars = Array.from(ratingPopup.querySelectorAll('button'));
 
@@ -66,7 +68,7 @@ function setupAnnoyingPopup() {
         thanksMessage.style.fontSize = '24px';
         content.appendChild(thanksMessage);
 
-        setTimeout(() => content.classList.add('slide-out'), 3 * 1000);
+        setTimeout(() => content.classList.add('weird-slide-out'), 4 * 1000);
 
         return setTimeout(() => ratingPopup.removeAttribute('open'), 5 * 1000);
       }
